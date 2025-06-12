@@ -1,0 +1,1 @@
+A config-driven Java console app to run predefined system scripts (e.g., clean temp files, backup folders).
