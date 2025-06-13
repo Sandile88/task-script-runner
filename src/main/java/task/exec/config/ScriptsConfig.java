@@ -1,6 +1,8 @@
 package task.exec.config;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -25,5 +27,19 @@ public class ScriptsConfig {
         } catch(IOException e) {
             e.printStackTrace();
         }    
+    }
+
+    public void readFile() {
+        // reading to a file
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("scripts.conf"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

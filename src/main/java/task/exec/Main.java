@@ -14,6 +14,8 @@ public class Main {
         ScriptsConfig config = new ScriptsConfig();
         config.writeFile();
         
-       
+        System.out.println("--------------- reading...");
+
+        config.readFile();
     }
 }
