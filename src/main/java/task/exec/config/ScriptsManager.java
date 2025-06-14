@@ -24,7 +24,7 @@ public class ScriptsManager {
 
             if (line.startsWith("[") && line.endsWith("]")) {
                 if (scriptName != null) {
-                    continue; //to be edited
+                    addScript(scriptName, scriptDetails); //storing previous script to map
                 }
 
                 scriptName = line.substring(1, line.length() - 1); //get script name inside brackets
@@ -37,8 +37,16 @@ public class ScriptsManager {
             }
 
             if(scriptName != null) {
-                continue; // to be edited
+                addScript(scriptName, scriptDetails);
             }
         }
+    }
+
+    private void addScript(String name, Map<String, String> config) {
+        int id = scripts.size() + 1; //script counter
+        String command = config.getOrDefault("command", "");
+        String description = config.getOrDefault("description", "");
+
+        scripts.put(name, new Script(id, name, command, description)); //script obj
     }
 }
