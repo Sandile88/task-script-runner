@@ -1,45 +1,44 @@
-// package task.exec.config;
+package task.exec.config;
 
-// import java.io.BufferedReader;
-// import java.io.BufferedWriter;
-// import java.io.FileReader;
-// import java.io.FileWriter;
-// import java.io.IOException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.*;
+import task.exec.model.Script;
 
-// public class ScriptsManager {
+public class ScriptsManager {
 
-//     // testing
-//      //writing to a file
-    
-//     public void saveScriptsToFile() {
-//         try {
-//             String[] names = {"John", "Carl", "Jerry"};
-//             // i think i will put my scripts in a file and they will be read as an array
+    private final Map<String, Script> scripts = new LinkedHashMap<>(); //preserves order of scripts
 
-//             BufferedWriter writer = new BufferedWriter(new FileWriter("scripts.conf"));
-//             writer.write("Writing to a file");
-//             writer.write("\nAnother line");
+    public void loadScripts(String path) throws IOException {
+        List<String> lines = Files.readAllLines(Path.of(path));
 
-//             for (String name : names) {
-//                 writer.write("\n" + name);
-//             }
-//             writer.close();
-//         } catch(IOException e) {
-//             e.printStackTrace();
-//         }    
-//     }
+        String scriptName = null;
+        Map<String, String> scriptDetails = new HashMap<>();
 
-//     public void readFile() {
-//         // reading to a file
-//         try {
-//             BufferedReader reader = new BufferedReader(new FileReader("scripts.conf"));
-//             String line;
-//             while ((line = reader.readLine()) != null) {
-//                 System.out.println(line);
-//             }
-//             reader.close();
-//         } catch (IOException e) {
-//             e.printStackTrace();
-//         }
-//     }
-// }
+        for (String line : lines) {
+            line = line.trim(); // assigning back for line to change value
+            if (line.isEmpty() || line.startsWith("#")) {
+                continue;
+            }
+
+            if (line.startsWith("[") && line.endsWith("]")) {
+                if (scriptName != null) {
+                    continue; //to be edited
+                }
+
+                scriptName = line.substring(1, line.length() - 1); //get script name inside brackets
+                scriptDetails = new HashMap<>(); // preparing new map for script's data
+            } else {
+                String[] parts = line.split("=", 2);
+                if (parts.length == 2) {
+                    scriptDetails.put(parts[0].trim(), parts[1].trim());
+                }
+            }
+
+            if(scriptName != null) {
+                continue; // to be edited
+            }
+        }
+    }
+}

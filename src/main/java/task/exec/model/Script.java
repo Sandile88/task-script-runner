@@ -5,24 +5,25 @@ public class Script {
     public String name;
     public String command;
     public String description;
+    
 
     public Script(int id, String name, String command, String description) {
         this.id = id;
         this.name = name;
         this.command = command;
-        this.command = command;
+        this.description = description;
     }
 
-    public int getId(int id) {
+    public int getId() {
         return id;
     }
-    public String getName(String name) {
+    public String getName() {
         return name;
     }
-    public String getCommand(String command) {
+    public String getCommand() {
         return command;
     }
-    public String getDescription(String description) {
+    public String getDescription() {
         return description;
     }
 
