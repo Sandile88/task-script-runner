@@ -42,11 +42,22 @@ public class ScriptsManager {
         }
     }
 
-    private void addScript(String name, Map<String, String> config) {
+    public void addScript(String name, Map<String, String> config) {
         int id = scripts.size() + 1; //script counter
         String command = config.getOrDefault("command", "");
         String description = config.getOrDefault("description", "");
 
         scripts.put(name, new Script(id, name, command, description)); //script obj
     }
+
+    public void listScripts() {
+        System.out.printf("%-3s | %-15s | %s%n",
+                            "ID", "Name", "Description");
+        System.out.println("----+-----------------+---------+-------------------------");
+        scripts.values().forEach(s -> 
+            System.out.printf("%-3d | %-15s | %s%n",
+                                s.getId(), s.getName(), s.getDescription()));
+
+    }
+
 }
