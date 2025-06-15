@@ -60,4 +60,32 @@ public class ScriptsManager {
 
     }
 
+    public void runScript(String key) throws IOException, InterruptedException {
+        Script s = scripts.getOrDefault(key, null); //fetching script by name
+
+        if (s == null) { //inserted id
+            try {
+                int id = Integer.parseInt(key);
+                s = scripts.values() //looking through every script
+                        .stream()
+                        .filter(scpt -> scpt.getId() == id)
+                        .findFirst()
+                        .orElse(null);
+            } catch (NumberFormatException e) {} //ignored when something other than number is inserted
+        }
+    
+
+        if (s == null) {
+            System.out.println("Script not found");
+            return;
+        }
+
+        System.out.printf("→ Running \"%s\" …%n%n", s.getName());
+        Process process = new ProcessBuilder()
+                            .command(null) //building command list
+                            .inheritIO() // able to see live output
+                            .start();
+        int exit = process.waitFor(); //wait for script to finishes
+        System.out.printf("%nFinished with exit code %d%n", exit);
+
 }
