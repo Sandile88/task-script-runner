@@ -17,11 +17,14 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         while(true) {
-            System.out.println("\nCommands: list"); 
+            System.out.println("\nCommands: list | run <id/name> | exit");
             System.out.println("> ");
             String input = sc.nextLine().trim();
-            if(input.equals("list")) { //change to switch case
+            if (input.equals("exit")) break;
+            if (input.equals("list")) { //change to switch case
                 scriptsManager.listScripts();
+            }if (input.startsWith("run")) {
+                scriptsManager.runScript(input.substring(4).trim());
             }
         }
         
