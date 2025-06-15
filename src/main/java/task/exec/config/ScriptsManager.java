@@ -81,11 +81,18 @@ public class ScriptsManager {
         }
 
         System.out.printf("→ Running \"%s\" …%n%n", s.getName());
-        Process process = new ProcessBuilder()
-                            .command(null) //building command list
+        Process process = new ProcessBuilder() //launches shell cmd
+                            .command(parseScriptCommand(s)) //building command list
                             .inheritIO() // able to see live output
                             .start();
         int exit = process.waitFor(); //wait for script to finishes
         System.out.printf("%nFinished with exit code %d%n", exit);
 
+    }
+
+
+
+    private List<String> parseScriptCommand(Script script) {
+        return Arrays.asList("bash", "-c", script.getCommand()); // forLinux/macOs
+    }
 }
