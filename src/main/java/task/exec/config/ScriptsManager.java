@@ -85,7 +85,7 @@ public class ScriptsManager {
             System.out.println("Enter args for the script (e.g, filename): ");
             System.out.println("> ");
             String arg = scanner.nextLine();
-            command = command.replace("{arg}", arg)
+            command = command.replace("{arg}", arg);
         }
 
         System.out.printf("→ Running \"%s\" …%n%n", s.getName());

@@ -24,7 +24,7 @@ public class Main {
             if (input.equals("list")) { //change to switch case
                 scriptsManager.listScripts();
             }if (input.startsWith("run")) {
-                scriptsManager.runScript(input.substring(4).trim());
+                // scriptsManager.runScript(input.substring(4).trim());
             }
         }
         
