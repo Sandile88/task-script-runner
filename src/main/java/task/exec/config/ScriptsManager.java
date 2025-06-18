@@ -115,6 +115,33 @@ public class ScriptsManager {
         System.out.println("Script added.");
     }
 
+    public void editScript(Scanner scanner) {
+        System.out.println("Enter script name to edit: ");
+        String name = scanner.nextLine();
+
+        Script script = scripts.get(name);
+        if (script == null) {
+            System.out.println("Script not found");
+            return;
+        }
+
+        System.out.println("New command (leave blank to keep current): ");
+        String command = scanner.nextLine();
+
+        if (!command.isBlank()) {
+            script.setCommand(command);
+        }
+
+        System.out.println("New description (leave blank to keep current): ");
+        String description = scanner.nextLine();
+
+        if (!description.isBlank()) {
+            script.setDescription(description);
+        }
+
+        System.out.println("Script updated");
+
+    }
 
 
 
