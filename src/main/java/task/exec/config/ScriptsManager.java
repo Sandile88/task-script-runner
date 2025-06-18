@@ -1,5 +1,6 @@
 package task.exec.config;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,6 +13,7 @@ public class ScriptsManager {
 
     public void loadScripts(String path) throws IOException {
         List<String> lines = Files.readAllLines(Path.of(path));
+        scripts.clear(); //removing all existing scripts before loading new ones
 
         String scriptName = null;
         Map<String, String> scriptDetails = new HashMap<>();
@@ -90,8 +92,24 @@ public class ScriptsManager {
 
     }
 
+    public void saveScripts(String path) throws IOException {
+        BufferedWriter writer = Files.newBufferedWriter(Path.of(path));
+
+        for (Script script : scripts.values()) {
+
+            writer.write("[" + script.getName() + "]");
+            writer.write("command =" + script.getCommand() + "\n");
+            writer.write("description" + script.getDescription() + "\n\n");
+        }
+
+        writer.close();
+    }
 
 
+
+
+
+    // helper method
     private List<String> parseScriptCommand(Script script) {
         return Arrays.asList("bash", "-c", script.getCommand()); // forLinux/macOs
     }

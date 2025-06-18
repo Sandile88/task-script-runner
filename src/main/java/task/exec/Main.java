@@ -14,7 +14,7 @@ public class Main {
 
         ScriptsManager scriptsManager = new ScriptsManager();
         scriptsManager.loadScripts("scripts.conf");
-
+ 
         Scanner sc = new Scanner(System.in);
         while(true) {
             System.out.println("\nCommands: list | run <id/name> | exit");

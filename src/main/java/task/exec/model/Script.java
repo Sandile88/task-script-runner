@@ -27,4 +27,12 @@ public class Script {
         return description;
     }
 
+    public void setCommand(String command) {
+        this.command = command;
+    }
+
+     public void setDescription(String description) {
+        this.description = description;
+    }
+
 }
