@@ -44,13 +44,7 @@ public class ScriptsManager {
         }
     }
 
-    public void addScript(String name, Map<String, String> config) {
-        int id = scripts.size() + 1; //script counter
-        String command = config.getOrDefault("command", "");
-        String description = config.getOrDefault("description", "");
-
-        scripts.put(name, new Script(id, name, command, description)); //script obj
-    }
+    
 
     public void listScripts() {
         System.out.printf("%-3s | %-15s | %s%n",
@@ -105,11 +99,34 @@ public class ScriptsManager {
         writer.close();
     }
 
+    public void addScriptFromUserInput(Scanner scanner) {
+        System.out.println("Script name: ");
+        String name = scanner.nextLine();
+
+        System.out.println("Command: ");
+        String command = scanner.nextLine();
+
+        System.out.println("Description: ");
+        String description = scanner.nextLine();
+
+        int id = scripts.size() + 1;
+        Script newScript = new Script(id, name, command, description);
+        scripts.put(name, newScript);
+        System.out.println("Script added.");
+    }
 
 
 
 
-    // helper method
+    // helper methods:
+    public void addScript(String name, Map<String, String> config) {
+        int id = scripts.size() + 1; //script counter
+        String command = config.getOrDefault("command", "");
+        String description = config.getOrDefault("description", "");
+
+        scripts.put(name, new Script(id, name, command, description)); //script obj
+    }
+
     private List<String> parseScriptCommand(Script script) {
         return Arrays.asList("bash", "-c", script.getCommand()); // forLinux/macOs
     }
