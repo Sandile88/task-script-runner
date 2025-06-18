@@ -56,7 +56,10 @@ public class ScriptsManager {
 
     }
 
-    public void runScript(String key) throws IOException, InterruptedException {
+    public void runScript(Scanner scanner) throws IOException, InterruptedException {
+        System.out.println("Enter script name or ID: ");
+        String key = scanner.nextLine();
+
         Script s = scripts.getOrDefault(key, null); //fetching script by name
 
         if (s == null) { //inserted id
@@ -76,6 +79,15 @@ public class ScriptsManager {
             return;
         }
 
+        // checking if it needs extra args
+        String command = s.getCommand();
+        if(command.contains("{")) {
+            System.out.println("Enter args for the script (e.g, filename): ");
+            System.out.println("> ");
+            String arg = scanner.nextLine();
+            command = command.replace("{arg}", arg)
+        }
+
         System.out.printf("→ Running \"%s\" …%n%n", s.getName());
         Process process = new ProcessBuilder() //launches shell cmd
                             .command(parseScriptCommand(s)) //building command list
@@ -89,11 +101,11 @@ public class ScriptsManager {
     public void saveScripts(String path) throws IOException {
         BufferedWriter writer = Files.newBufferedWriter(Path.of(path));
 
-        for (Script script : scripts.values()) {
+        for (Script s : scripts.values()) {
 
-            writer.write("[" + script.getName() + "]");
-            writer.write("command =" + script.getCommand() + "\n");
-            writer.write("description" + script.getDescription() + "\n\n");
+            writer.write("[" + s.getName() + "]");
+            writer.write("command =" + s.getCommand() + "\n");
+            writer.write("description" + s.getDescription() + "\n\n");
         }
 
         writer.close();
@@ -119,8 +131,8 @@ public class ScriptsManager {
         System.out.println("Enter script name to edit: ");
         String name = scanner.nextLine();
 
-        Script script = scripts.get(name);
-        if (script == null) {
+        Script s = scripts.get(name);
+        if (s == null) {
             System.out.println("Script not found");
             return;
         }
@@ -129,18 +141,29 @@ public class ScriptsManager {
         String command = scanner.nextLine();
 
         if (!command.isBlank()) {
-            script.setCommand(command);
+            s.setCommand(command);
         }
 
         System.out.println("New description (leave blank to keep current): ");
         String description = scanner.nextLine();
 
         if (!description.isBlank()) {
-            script.setDescription(description);
+            s.setDescription(description);
         }
 
         System.out.println("Script updated");
 
+    }
+
+    public void deleteScript(Scanner scanner) {
+        System.out.println("Enter script name to delete: ");
+        String name = scanner.nextLine();
+
+        if (scripts.remove(name) != null) {
+            System.out.println("Script deleted.");
+        } else {
+            System.out.println("Script not found.");
+        }
     }
 
 
