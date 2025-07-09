@@ -26,7 +26,7 @@ public class ScriptsManager {
 
         // check if script has contents or not
         if (lines.isEmpty()) {
-        System.out.println("⚠️ scripts.conf is empty.");
+        System.out.println("scripts.conf is empty.");
         return;
     }
         scripts.clear(); //removing all existing scripts before loading new ones

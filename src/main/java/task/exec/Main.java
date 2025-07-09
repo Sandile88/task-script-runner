@@ -10,7 +10,7 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         ScriptsManager scriptsManager = new ScriptsManager();
-        String path = Path.of("").toAbsolutePath().resolve("scripts.conf").toString(); //detect project root
+        String path = Path.of("").toAbsolutePath().resolve("data/scripts.conf").toString(); //detect project root
 
         scriptsManager.loadScripts(path);
  

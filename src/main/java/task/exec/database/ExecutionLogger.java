@@ -4,7 +4,7 @@ import java.sql.*;
 import java.time.LocalDateTime;
 
 public class ExecutionLogger {
-    private final String dbUrl = "jdbc:sqlite:logs.db";
+    private final String dbUrl = "jdbc:sqlite:data/logs.db";
 
     public ExecutionLogger() {
         try (
