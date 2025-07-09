@@ -5,10 +5,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+
+import task.exec.database.ExecutionLogger;
 import task.exec.model.Script;
 
 public class ScriptsManager {
 
+    private final ExecutionLogger logger = new ExecutionLogger();
     private final Map<String, Script> scripts = new LinkedHashMap<>(); //preserves order of scripts
 
     public void loadScripts(String path) throws IOException {
@@ -108,6 +111,8 @@ public class ScriptsManager {
         int exit = process.waitFor(); //wait for script to finishes
         System.out.printf("%nFinished with exit code %d%n", exit);
 
+        logger.log(s.getName(), exit);
+
     }
 
     public void saveScripts(String path) throws IOException {
@@ -191,5 +196,9 @@ public class ScriptsManager {
 
     private List<String> parseScriptCommand(String command) {
         return Arrays.asList("bash", "-c", command); // forLinux/macOs
+    }
+
+    public void showLogs() {
+        logger.showLogs();
     }
 }

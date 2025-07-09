@@ -15,7 +15,7 @@ public class Main {
         scriptsManager.loadScripts(path);
  
         while(true) {
-            System.out.print("\nCommands: list | run | add | edit | delete | save | exit\n> ");
+            System.out.print("\nCommands: list | run | add | edit | delete | save | logs | exit\n> ");
 
             String input = sc.nextLine().trim();
 
@@ -25,6 +25,7 @@ public class Main {
                 case "add" -> scriptsManager.addScriptFromUserInput(sc);
                 case "edit" -> scriptsManager.editScript(sc);
                 case "delete" -> scriptsManager.deleteScript(sc);
+                case "logs" -> scriptsManager.showLogs();
                 case "exit" -> {
                     scriptsManager.saveScripts(path);
                     System.out.println("Changes saved. Goodbye!");
