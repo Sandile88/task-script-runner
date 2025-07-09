@@ -50,10 +50,10 @@ public class ScriptsManager {
             }
 
         }
-
         if(scriptName != null) {
             addScript(scriptName, scriptDetails);
         }
+
     }
 
     
@@ -115,9 +115,9 @@ public class ScriptsManager {
 
         for (Script s : scripts.values()) {
 
-            writer.write("[" + s.getName() + "]");
-            writer.write("command =" + s.getCommand() + "\n");
-            writer.write("description" + s.getDescription() + "\n\n");
+            writer.write("[" + s.getName() + "]\n");
+            writer.write("command = " + s.getCommand() + "\n");
+            writer.write("description = " + s.getDescription() + "\n\n");
         }
 
         writer.close();
