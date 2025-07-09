@@ -12,7 +12,20 @@ public class ScriptsManager {
     private final Map<String, Script> scripts = new LinkedHashMap<>(); //preserves order of scripts
 
     public void loadScripts(String path) throws IOException {
+        // check for existance of scripts.conf file
+        Path confPath = Path.of(path);
+        if (!Files.exists(confPath)) {
+            System.out.println("scripts.conf file not found at: " + path);
+            return;
+        }
+
         List<String> lines = Files.readAllLines(Path.of(path));
+
+        // check if script has contents or not
+        if (lines.isEmpty()) {
+        System.out.println("⚠️ scripts.conf is empty.");
+        return;
+    }
         scripts.clear(); //removing all existing scripts before loading new ones
 
         String scriptName = null;
