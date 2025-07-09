@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 import task.exec.config.ScriptsManager;
@@ -14,14 +15,13 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         ScriptsManager scriptsManager = new ScriptsManager();
-        String path = "scripts.conf";
+        String path = Path.of("").toAbsolutePath().resolve("scripts.conf").toString(); //detect project root
 
         scriptsManager.loadScripts(path);
  
         while(true) {
             System.out.print("\nCommands: list | run | add | edit | delete | save | exit\n> ");
 
-            System.out.println("> ");
             String input = sc.nextLine().trim();
 
             switch (input) {

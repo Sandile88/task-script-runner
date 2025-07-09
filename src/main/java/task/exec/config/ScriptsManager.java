@@ -20,10 +20,8 @@ public class ScriptsManager {
 
         for (String line : lines) {
             line = line.trim(); // assigning back for line to change value
-            if (line.isEmpty() || line.startsWith("#")) {
-                continue;
-            }
-
+            if (line.isEmpty() || line.startsWith("#")) continue;
+    
             if (line.startsWith("[") && line.endsWith("]")) {
                 if (scriptName != null) {
                     addScript(scriptName, scriptDetails); //storing previous script to map
@@ -38,9 +36,10 @@ public class ScriptsManager {
                 }
             }
 
-            if(scriptName != null) {
-                addScript(scriptName, scriptDetails);
-            }
+        }
+
+        if(scriptName != null) {
+            addScript(scriptName, scriptDetails);
         }
     }
 
