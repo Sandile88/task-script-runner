@@ -64,6 +64,44 @@ Commands: list | run | add | edit | delete | logs | save | exit
 
 ---
 
+## Viewing Logs of Run Commands
+
+Every time you run a script using this tool, the result is saved in a local SQLite database (data/logs.db).
+
+### 🔍 To View the Logs:
+
+1. **Open your terminal and navigate to the project directory:**
+```bash
+cd /path/to/task-script-runner
+```
+
+2. **Start the SQLite CLI with the logs database:**
+```bash
+sqlite3 data/logs.db
+```
+
+3. **(Optional but recommended) For better readability, enable headers and column formatting:**
+```sql
+.headers on
+.mode columns
+```
+
+4. **Run the following SQL command to view the logs:**
+```sql
+SELECT * FROM scripts_run;
+```
+
+This will show you:
+- The script that was run
+- When it was executed
+- The exit code of the command
+
+**Tip:**
+- `exit_code = 0` usually means success.
+- Any other code indicates an error or interruption.
+
+---
+
 ## What I Learned
 
 This project helped me understand and apply:

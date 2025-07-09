@@ -4,8 +4,10 @@ import java.sql.*;
 import java.time.LocalDateTime;
 
 public class ExecutionLogger {
+    // SQLite db file location (inside data/ directory)
     private final String dbUrl = "jdbc:sqlite:data/logs.db";
 
+    // Initializes the db and ensures the table exists
     public ExecutionLogger() {
         try (
             Connection conn = DriverManager.getConnection(dbUrl);
@@ -24,6 +26,7 @@ public class ExecutionLogger {
         }
     }
 
+    // Logs a script execution into the database
     public void log(String scriptName, int exitCode) {
         String sql = "INSERT INTO scripts_run (script_name, timestamp, exit_code) VALUES (?, ?, ?)";
         try (
@@ -39,6 +42,7 @@ public class ExecutionLogger {
         }
     }
 
+    // Displays the logs in a formatted table
     public void showLogs() {
         String sql = "SELECT id, script_name, timestamp, exit_code FROM scripts_run ORDER BY timestamp DESC";
         try (
