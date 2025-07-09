@@ -1,4 +1,4 @@
-# 🛠️ Task Script Runner (CLI-based Automation Tool)
+# Task Script Runner (CLI-based Automation Tool)
 
 > A simple, config-driven automation tool built with Java that lets you run predefined scripts from your terminal, edit or add new ones, and track usage logs.
 
@@ -64,7 +64,7 @@ Commands: list | run | add | edit | delete | logs | save | exit
 
 ---
 
-## 🧠 What I Learned
+## What I Learned
 
 This project helped me understand and apply:
 
@@ -77,56 +77,52 @@ This project helped me understand and apply:
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 task-script-runner/
-├── scripts.conf                    # Script definitions
-├── logs.db                         # SQLite database for logs
+├── README.md
+├── data/
+│   ├── logs.db                     # SQLite database for logs
+│   └── scripts.conf                # Script definitions
+├── pom.xml                         # Maven config
 ├── src/
 │   ├── main/
 │   │   ├── java/
 │   │   │   └── task/
 │   │   │       └── exec/
 │   │   │           ├── Main.java
-│   │   │           ├── config/ScriptsManager.java
-│   │   │           ├── database/ExecutionLogger.java
-│   │   │           └── model/Script.java
+│   │   │           ├── config/
+│   │   │           │   └── ScriptsManager.java             # Core class for loading, editing, running, and saving scripts
+│   │   │           ├── database/
+│   │   │           │   └── ExecutionLogger.java            # SQLite database storing execution logs
+│   │   │           └── model/
+│   │   │               └── Script.java                     # POJO representing a script
+│   │   └── resources/
+│   └── test/
+│       └── java/
+└── target/                         # Compiled classes (generated)
+    ├── classes/
+    └── test-classes/
 ```
 
 ---
 
-## 📜 License
+## Contributions Welcome!
 
-This project is licensed under the MIT License.
-You are free to use, modify, and distribute this project.
-
----
-
-## 🤝 Contributions Welcome!
-
-This project started as a personal learning journey — but anyone is welcome to:
+This project started as a personal learning journey but anyone is welcome to:
 
 - Suggest features
 - Add new script types
 - Extend with a GUI or web interface
 - Port to another language
 
-Feel free to fork and build upon it! ⚡
+Feel free to fork and build upon it!
 
 ---
 
-## 📬 Contact
+## License
 
-Created with ❤️ by **Sandile M'remi**
-
-[GitHub](https://github.com/your-username) · [Email](mailto:your-email@example.com)
+This project is licensed under the [MIT License](https://opensource.org/license/mit).
 
 ---
-
-*Let me know if you want:*
-- *A sample LICENSE file (MIT)*
-- *A badge header (like build passing, license, etc.)*
-- *Help deploying it to GitHub with visuals*
-
-*This README is good to copy-paste directly into your project root as README.md.*
