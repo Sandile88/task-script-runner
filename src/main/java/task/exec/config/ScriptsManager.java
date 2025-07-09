@@ -83,7 +83,7 @@ public class ScriptsManager {
         String command = s.getCommand();
         if(command.contains("{")) {
             System.out.println("Enter args for the script (e.g, filename): ");
-            System.out.println("> ");
+            System.out.print("> ");
             String arg = scanner.nextLine();
             command = command.replace("{arg}", arg);
         }
@@ -112,13 +112,13 @@ public class ScriptsManager {
     }
 
     public void addScriptFromUserInput(Scanner scanner) {
-        System.out.println("Script name: ");
+        System.out.print("Script name: ");
         String name = scanner.nextLine();
 
-        System.out.println("Command: ");
+        System.out.print("Command: ");
         String command = scanner.nextLine();
 
-        System.out.println("Description: ");
+        System.out.print("Description: ");
         String description = scanner.nextLine();
 
         int id = scripts.size() + 1;
@@ -128,7 +128,7 @@ public class ScriptsManager {
     }
 
     public void editScript(Scanner scanner) {
-        System.out.println("Enter script name to edit: ");
+        System.out.print("Enter script name to edit: ");
         String name = scanner.nextLine();
 
         Script s = scripts.get(name);
@@ -137,14 +137,14 @@ public class ScriptsManager {
             return;
         }
 
-        System.out.println("New command (leave blank to keep current): ");
+        System.out.print("New command (leave blank to keep current): ");
         String command = scanner.nextLine();
 
         if (!command.isBlank()) {
             s.setCommand(command);
         }
 
-        System.out.println("New description (leave blank to keep current): ");
+        System.out.print("New description (leave blank to keep current): ");
         String description = scanner.nextLine();
 
         if (!description.isBlank()) {
@@ -156,7 +156,7 @@ public class ScriptsManager {
     }
 
     public void deleteScript(Scanner scanner) {
-        System.out.println("Enter script name to delete: ");
+        System.out.print("Enter script name to delete: ");
         String name = scanner.nextLine();
 
         if (scripts.remove(name) != null) {
@@ -169,7 +169,7 @@ public class ScriptsManager {
 
 
     // helper methods:
-    public void addScript(String name, Map<String, String> config) {
+    private void addScript(String name, Map<String, String> config) {
         int id = scripts.size() + 1; //script counter
         String command = config.getOrDefault("command", "");
         String description = config.getOrDefault("description", "");
